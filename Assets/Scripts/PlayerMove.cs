@@ -1,9 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMove : MonoBehaviour
 {
+  bool alive = true;
+
   public float speed = 4;
 
   float horizontalInput;
@@ -20,6 +21,8 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+      if (!alive) return;
+
       Vector3 forwardMove = transform.forward * speed * Time.fixedDeltaTime;
       Vector3 horizontalMove = transform.right * horizontalInput * speed * Time.fixedDeltaTime * horizontalMultiplier;
       rb.MovePosition(rb.position + forwardMove + horizontalMove);
@@ -43,5 +46,21 @@ public class PlayerMove : MonoBehaviour
 
     private void Update () {
       horizontalInput = Input.GetAxis("Horizontal");
+
+      if (transform.position.y < -5) {
+        Die();
+      }
+    }
+
+    public void Die()
+    {
+      alive = false;
+      //Falls Restart function with 2 seconds delay
+      Invoke("Restart", 2);
+    }
+
+    void Restart () {
+      //Restart the Game
+      SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
