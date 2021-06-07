@@ -6,16 +6,24 @@ public class PlayerMove : MonoBehaviour
   bool alive = true;
 
   public float speed = 4;
+  public float speedIncreasePerPoint = 0.1f;
 
   float horizontalInput;
   public float horizontalMultiplier = 2;
 
   public Rigidbody rb;
+  private Animator playerAnim;
+
+    [SerializeField]
+    float jumpForce = 400f;
+    [SerializeField]
+    LayerMask groundMask;
+
 
     // Start is called before the first frame update
     void Start()
     {
-
+     playerAnim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -47,6 +55,11 @@ public class PlayerMove : MonoBehaviour
     private void Update () {
       horizontalInput = Input.GetAxis("Horizontal");
 
+      if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Jump();
+        }
+
       if (transform.position.y < -5) {
         Die();
       }
@@ -62,5 +75,18 @@ public class PlayerMove : MonoBehaviour
     void Restart () {
       //Restart the Game
       SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    void Jump()
+    {
+        float height = GetComponent<Collider>().bounds.size.y;
+        bool isGrounded = Physics.Raycast(transform.position, Vector3.down, (height / 2) + 0.1f, groundMask);
+        if (!isGrounded)
+        {
+            return;
+        }
+
+        rb.AddForce(Vector3.up * jumpForce);
+        playerAnim.SetTrigger("Jump_trig");
     }
 }

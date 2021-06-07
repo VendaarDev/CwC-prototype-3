@@ -226,6 +226,8 @@ GameObject:
   - component: {fileID: 7037329584056262782}
   - component: {fileID: 1204065710056729114}
   - component: {fileID: 7172740504502874339}
+  - component: {fileID: 2876428074734971469}
+  - component: {fileID: 7187594054541904828}
   m_Layer: 6
   m_Name: GroundTile
   m_TagString: Untagged
@@ -278,4 +280,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstaclePrefab: {fileID: 1136196394227558835, guid: 2916a94ab39e1bd489463325f4da0bc7, type: 3}
-  maskPrefab: {fileID: 4125564307763968282, guid: 644be69f8168de041a36d4a82edc58a3, type: 3}
+  maskPrefab: {fileID: 7892397249356131317, guid: c6d40e7b33cda914b92fb3e0187eea18, type: 3}
+  tallObstaclePrefab: {fileID: 2503189181759351268, guid: cf02c15fb9a80f74898812236c18e37d, type: 3}
+  tallObstacleChance: 0.2
+--- !u!65 &2876428074734971469
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9105914854740589127}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 10, z: 10}
+  m_Center: {x: 6, y: 0, z: 5}
+--- !u!65 &7187594054541904828
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9105914854740589127}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 10, z: 10}
+  m_Center: {x: -6, y: 0, z: 5}

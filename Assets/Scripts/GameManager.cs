@@ -1,11 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class GameManager : MonoBehaviour
 {
-  public int score;
+  int score;
   public static GameManager inst;
+
+  
+  public Text scoreText;
+
+  [SerializeField]
+  PlayerMove playerMove;
+
+public void IncrementScore()
+    {
+        score++;
+        scoreText.text = "SCORE: " + score;
+        playerMove.speed += playerMove.speedIncreasePerPoint;
+    }
 
     void Awake()
     {

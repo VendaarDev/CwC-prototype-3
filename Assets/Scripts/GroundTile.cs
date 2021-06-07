@@ -5,17 +5,20 @@ public class GroundTile : MonoBehaviour
   GroundSpawner groundSpawner;
   public GameObject obstaclePrefab;
   public GameObject maskPrefab;
+
+ [SerializeField] GameObject tallObstaclePrefab;
+ [SerializeField] float  tallObstacleChance = 0.2f;
+
     // Start is called before the first frame update
     void Start()
     {
         groundSpawner = GameObject.FindObjectOfType<GroundSpawner>();
-        spawnObstacle();
-        spawnMasks();
+        
     }
 
     private void OnTriggerExit (Collider other)
     {
-      groundSpawner.SpawnTile();
+      groundSpawner.SpawnTile(true);
       Destroy(gameObject, 2);
     }
 
@@ -25,15 +28,22 @@ public class GroundTile : MonoBehaviour
 
     }
 
-    void spawnObstacle ()
+    public void spawnObstacle ()
     {
+      GameObject obstacleToSpawn = obstaclePrefab;
+      float random = Random.Range(0f, 1f);
+        if (random < tallObstacleChance)
+        {
+            obstacleToSpawn = tallObstaclePrefab;
+        }
+
       int obstacleSpawnIndex = Random.Range(2, 5);
       Transform spawnPoint = transform.GetChild(obstacleSpawnIndex).transform;
 
-      Instantiate(obstaclePrefab, spawnPoint.position, Quaternion.identity, transform);
+      Instantiate(obstacleToSpawn, spawnPoint.position, Quaternion.identity, transform);
     }
 
-    void spawnMasks ()
+    public void spawnMasks ()
     {
       int masksToSpawn = Random.Range(0, 2);
       for (int i = 0; i < masksToSpawn; i++) {

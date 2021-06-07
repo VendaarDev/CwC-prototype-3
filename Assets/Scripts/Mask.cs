@@ -18,7 +18,7 @@ public class Mask : MonoBehaviour
       if (other.gameObject.name != "Player") {
         return;
       }
-      GameManager.inst.score++;
+      GameManager.inst.IncrementScore();
 
         Destroy(gameObject);
 
@@ -32,6 +32,6 @@ public class Mask : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    transform.Rotate(0, turnSpeed * Time.deltaTime, 0);
+    transform.Rotate(0, 0, turnSpeed * Time.deltaTime);
     }
 }
